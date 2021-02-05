@@ -3,7 +3,7 @@ Created on May 5, 2017
 
 @author: anthony
 '''
-import urllib3.requests
+import urllib3
 import math
 import re
 from bs4 import BeautifulSoup
