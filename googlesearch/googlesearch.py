@@ -3,7 +3,7 @@ Created on May 5, 2017
 
 @author: anthony
 '''
-import urllib3
+import urllib3.request
 import math
 import re
 from bs4 import BeautifulSoup
@@ -30,9 +30,9 @@ class GoogleSearch:
         total = None;
         for i in range(pages) :
             start = i * GoogleSearch.RESULTS_PER_PAGE
-            opener = urllib3.requests.build_opener()
+            opener = urllib3.request.build_opener()
             opener.addheaders = GoogleSearch.DEFAULT_HEADERS
-            response = opener.open(GoogleSearch.SEARCH_URL + "?q="+ urllib3.requests.quote(query) + ("" if start == 0 else ("&start=" + str(start))))
+            response = opener.open(GoogleSearch.SEARCH_URL + "?q="+ urllib3.request.quote(query) + ("" if start == 0 else ("&start=" + str(start))))
             soup = BeautifulSoup(response.read(), "lxml")
             response.close()
             if total is None:
@@ -89,7 +89,7 @@ class SearchResult:
     
     def getMarkup(self):
         if self.__markup is None:
-            opener = urllib3.requests.build_opener()
+            opener = urllib3.request.build_opener()
             opener.addheaders = GoogleSearch.DEFAULT_HEADERS
             response = opener.open(self.url);
             self.__markup = response.read()
